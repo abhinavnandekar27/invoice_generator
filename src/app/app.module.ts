@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';  // Import FormsModule
 import { AppComponent } from './app.component';
 import { PdfGeneratorComponent } from './pdf-generator/pdf-generator.component';
-import { PdfGeneratorService } from './pdf-generator.service';
 
 @NgModule({
   declarations: [
@@ -10,9 +10,10 @@ import { PdfGeneratorService } from './pdf-generator.service';
     PdfGeneratorComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule  // Add FormsModule here
   ],
-  providers: [PdfGeneratorService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

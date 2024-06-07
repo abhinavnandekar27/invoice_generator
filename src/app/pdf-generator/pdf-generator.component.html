@@ -1,67 +1,99 @@
-<div id="contentToConvert" style="width: 210mm; margin: 0 auto; padding: 20mm; background: #fff; font-family: Arial, sans-serif; border: 1px solid #ccc;">
-    <div style="text-align: center; margin-bottom: 20px;">
-      <h1>Company Name</h1>
-      <p>1234 Street Address, City, State, 12345</p>
-      <p>Phone: (123) 456-7890 | Email: infocompany.com</p>
-    </div>
-  
-    <div style="margin-bottom: 20px;">
-      <h2>Invoice</h2>
-      <p><strong>Date:</strong> June 7, 2024</p>
-      <p><strong>Invoice Number:</strong> 001</p>
-    </div>
-  
-    <div style="margin-bottom: 20px;">
-      <h3>Billing To:</h3>
-      <p><strong>Customer Name</strong></p>
-      <p>5678 Another St, Different City, State, 67890</p>
-      <p>Phone: (987) 654-3210 | Email: customerexample.com</p>
-    </div>
-  
-    <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
-      <thead>
-        <tr>
-          <th style="border: 1px solid #ccc; padding: 8px;">Description</th>
-          <th style="border: 1px solid #ccc; padding: 8px; text-align: right;">Quantity</th>
-          <th style="border: 1px solid #ccc; padding: 8px; text-align: right;">Unit Price</th>
-          <th style="border: 1px solid #ccc; padding: 8px; text-align: right;">Total</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td style="border: 1px solid #ccc; padding: 8px;">Product 1</td>
-          <td style="border: 1px solid #ccc; padding: 8px; text-align: right;">2</td>
-          <td style="border: 1px solid #ccc; padding: 8px; text-align: right;">$50.00</td>
-          <td style="border: 1px solid #ccc; padding: 8px; text-align: right;">$100.00</td>
-        </tr>
-        <tr>
-          <td style="border: 1px solid #ccc; padding: 8px;">Product 2</td>
-          <td style="border: 1px solid #ccc; padding: 8px; text-align: right;">1</td>
-          <td style="border: 1px solid #ccc; padding: 8px; text-align: right;">$150.00</td>
-          <td style="border: 1px solid #ccc; padding: 8px; text-align: right;">$150.00</td>
-        </tr>
-      </tbody>
-      <tfoot>
-        <tr>
-          <td colspan="3" style="border: 1px solid #ccc; padding: 8px; text-align: right;"><strong>Subtotal</strong></td>
-          <td style="border: 1px solid #ccc; padding: 8px; text-align: right;">$250.00</td>
-        </tr>
-        <tr>
-          <td colspan="3" style="border: 1px solid #ccc; padding: 8px; text-align: right;"><strong>Tax (10%)</strong></td>
-          <td style="border: 1px solid #ccc; padding: 8px; text-align: right;">$25.00</td>
-        </tr>
-        <tr>
-          <td colspan="3" style="border: 1px solid #ccc; padding: 8px; text-align: right;"><strong>Total</strong></td>
-          <td style="border: 1px solid #ccc; padding: 8px; text-align: right;">$275.00</td>
-        </tr>
-      </tfoot>
-    </table>
-  
-    <p>If you have any questions about this invoice, please contact us at (123) 456-7890 or infocompany.com.</p>
-    <p>Thank you for your business!</p>
+<div style="margin-bottom: 20px;">
+  <label>Company Name:</label>
+  <input type="text" [(ngModel)]="companyName">
+</div>
+<div style="margin-bottom: 20px;">
+  <label>Company Address:</label>
+  <input type="text" [(ngModel)]="companyAddress">
+</div>
+<div style="margin-bottom: 20px;">
+  <label>Company Phone:</label>
+  <input type="text" [(ngModel)]="companyPhone">
+</div>
+<div style="margin-bottom: 20px;">
+  <label>Company Email:</label>
+  <input type="text" [(ngModel)]="companyEmail">
+</div>
+<div style="margin-bottom: 20px;">
+  <label>Customer Name:</label>
+  <input type="text" [(ngModel)]="customerName">
+</div>
+<div style="margin-bottom: 20px;">
+  <label>Customer Address:</label>
+  <input type="text" [(ngModel)]="customerAddress">
+</div>
+<div style="margin-bottom: 20px;">
+  <label>Customer Phone:</label>
+  <input type="text" [(ngModel)]="customerPhone">
+</div>
+<div style="margin-bottom: 20px;">
+  <label>Customer Email:</label>
+  <input type="text" [(ngModel)]="customerEmail">
+</div>
+
+<!-- Invoice Display -->
+<div id="contentToConvert"
+  style="width: 210mm; margin: 0 auto; padding: 20mm; background: #fff; font-family: Arial, sans-serif; border: 1px solid #ccc;">
+  <div style="text-align: center; margin-bottom: 20px;">
+    <h1>{{ companyName }}</h1>
+    <p>{{ companyAddress }}</p>
+    <p>Phone: {{ companyPhone }} | Email: {{ companyEmail }}</p>
   </div>
-  
-  <div class="button-container">
-    <button (click)="generatePdf()">Generate PDF</button>
+
+  <div style="margin-bottom: 20px;">
+    <h2>Invoice</h2>
+    <p><strong>Date:</strong> {{ currentDate }}</p>
+    <p><strong>Invoice Number:</strong> {{ invoiceNumber }}</p>
   </div>
-  
+
+  <div style="margin-bottom: 20px;">
+    <h3>Billing To:</h3>
+    <p><strong>{{ customerName }}</strong></p>
+    <p>{{ customerAddress }}</p>
+    <p>Phone: {{ customerPhone }} | Email: {{ customerEmail }}</p>
+  </div>
+
+  <div style="margin-bottom: 20px;">
+    <button (click)="addItem()">Add Invoice Item</button>
+  </div>
+
+  <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+    <thead>
+      <tr>
+        <th style="border: 1px solid #ccc; padding: 8px;">Description</th>
+        <th style="border: 1px solid #ccc; padding: 8px; text-align: right;">Quantity</th>
+        <th style="border: 1px solid #ccc; padding: 8px; text-align: right;">Unit Price</th>
+        <th style="border: 1px solid #ccc; padding: 8px; text-align: right;">Total</th>
+        <th style="border: 1px solid #ccc; padding: 8px; text-align: center;">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of invoiceItems; let i = index">
+        <td style="border: 1px solid #ccc; padding: 8px;">
+          <input type="text" [(ngModel)]="item.description">
+        </td>
+        <td style="border: 1px solid #ccc; padding: 8px; text-align: right;">
+          <input type="number" [(ngModel)]="item.quantity" (input)="calculateTotal(item)">
+        </td>
+        <td style="border: 1px solid #ccc; padding: 8px; text-align: right;">
+          <input type="number" [(ngModel)]="item.unitPrice" (input)="calculateTotal(item)">
+        </td>
+        <td style="border: 1px solid #ccc; padding: 8px; text-align: right;">
+          <input type="number" [(ngModel)]="item.total" [readonly]="true">
+        </td>
+        <td style="border: 1px solid #ccc; padding: 8px; text-align: center;">
+          <button type="button" (click)="removeItem(i)">Remove</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <p>Total Quantity: <b> {{ totalQuantity }} </b> </p>
+  <p>Total Price: <b>{{ totalPrice | currency }}</b> </p>
+
+  <p>If you have any questions about this invoice, please contact us at {{ companyPhone }} or {{ companyEmail }}.</p>
+  <p>Thank you for your business!</p>
+</div>
+
+<div class="button-container" style="text-align: center; margin-top: 20px;">
+  <button (click)="generatePdf()">Generate PDF</button>
+</div>
