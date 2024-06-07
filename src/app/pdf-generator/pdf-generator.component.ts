@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
+import { ChangeDetectorRef } from '@angular/core';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
-import { PdfGeneratorService } from '../pdf-generator.service';
-
 
 interface InvoiceItem {
   description: string;
@@ -42,6 +41,9 @@ export class PdfGeneratorComponent {
   ];
 
   selectedItemIndex: number = -1;
+  hideButtons: boolean = false;
+
+  constructor(private cdr: ChangeDetectorRef) {}
 
   addItem(): void {
     this.invoiceItems.push({ description: '', quantity: 0, unitPrice: 0, total: 0 });
@@ -54,18 +56,19 @@ export class PdfGeneratorComponent {
   }
 
   calculateTotal(item: InvoiceItem): void {
-    // Calculate total for the item
     item.total = item.quantity * item.unitPrice;
     this.calculateSums();
   }
 
   calculateSums(): void {
-    // Calculate total units, total price, and total quantity
     this.totalQuantity = this.invoiceItems.reduce((sum, item) => sum + item.quantity, 0);
     this.totalPrice = this.invoiceItems.reduce((sum, item) => sum + item.total, 0);
   }
 
   generatePdf(): void {
+    this.hideButtons = true;
+    this.cdr.detectChanges();  // Trigger change detection to hide buttons
+
     const element = document.getElementById('contentToConvert');
     if (element) {
       html2canvas(element).then((canvas) => {
@@ -76,9 +79,16 @@ export class PdfGeneratorComponent {
         const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
         pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
         pdf.save('invoice.pdf');
+        this.hideButtons = false;
+        this.cdr.detectChanges();  // Trigger change detection to show buttons again
+      }).catch(() => {
+        this.hideButtons = false;
+        this.cdr.detectChanges();  // Reset the flag if an error occurs
       });
     } else {
       console.error('Element with id "contentToConvert" not found');
+      this.hideButtons = false;
+      this.cdr.detectChanges();  // Reset the flag if the element is not found
     }
   }
 }
