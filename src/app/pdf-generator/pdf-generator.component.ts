@@ -41,6 +41,7 @@ export class PdfGeneratorComponent {
   ];
 
   selectedItemIndex: number = -1;
+  signatureUrl: string | ArrayBuffer | null = null;
   hideButtons: boolean = false;
 
   constructor(private cdr: ChangeDetectorRef) {}
@@ -64,6 +65,17 @@ export class PdfGeneratorComponent {
     this.totalQuantity = this.invoiceItems.reduce((sum, item) => sum + item.quantity, 0);
     this.totalPrice = this.invoiceItems.reduce((sum, item) => sum + item.total, 0);
   }
+
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files[0]) {
+      const file = input.files[0];
+      const reader = new FileReader();
+      reader.onload = e => this.signatureUrl = reader.result;
+      reader.readAsDataURL(file);
+    }
+  }
+
 
   generatePdf(): void {
     this.hideButtons = true;

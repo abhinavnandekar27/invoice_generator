@@ -1,34 +1,36 @@
-<div style="margin-bottom: 20px;">
-  <label>Company Name:</label>
-  <input type="text" [(ngModel)]="companyName">
-</div>
-<div style="margin-bottom: 20px;">
-  <label>Company Address:</label>
-  <input type="text" [(ngModel)]="companyAddress">
-</div>
-<div style="margin-bottom: 20px;">
-  <label>Company Phone:</label>
-  <input type="text" [(ngModel)]="companyPhone">
-</div>
-<div style="margin-bottom: 20px;">
-  <label>Company Email:</label>
-  <input type="text" [(ngModel)]="companyEmail">
-</div>
-<div style="margin-bottom: 20px;">
-  <label>Customer Name:</label>
-  <input type="text" [(ngModel)]="customerName">
-</div>
-<div style="margin-bottom: 20px;">
-  <label>Customer Address:</label>
-  <input type="text" [(ngModel)]="customerAddress">
-</div>
-<div style="margin-bottom: 20px;">
-  <label>Customer Phone:</label>
-  <input type="text" [(ngModel)]="customerPhone">
-</div>
-<div style="margin-bottom: 20px;">
-  <label>Customer Email:</label>
-  <input type="text" [(ngModel)]="customerEmail">
+<div class="form-container">
+  <div class="form-group">
+    <label>Company Name:</label>
+    <input type="text" [(ngModel)]="companyName">
+  </div>
+  <div class="form-group">
+    <label>Company Address:</label>
+    <input type="text" [(ngModel)]="companyAddress">
+  </div>
+  <div class="form-group">
+    <label>Company Phone:</label>
+    <input type="text" [(ngModel)]="companyPhone">
+  </div>
+  <div class="form-group">
+    <label>Company Email:</label>
+    <input type="text" [(ngModel)]="companyEmail">
+  </div>
+  <div class="form-group">
+    <label>Customer Name:</label>
+    <input type="text" [(ngModel)]="customerName">
+  </div>
+  <div class="form-group">
+    <label>Customer Address:</label>
+    <input type="text" [(ngModel)]="customerAddress">
+  </div>
+  <div class="form-group">
+    <label>Customer Phone:</label>
+    <input type="text" [(ngModel)]="customerPhone">
+  </div>
+  <div class="form-group">
+    <label>Customer Email:</label>
+    <input type="text" [(ngModel)]="customerEmail">
+  </div>
 </div>
 
 <!-- Invoice Display -->
@@ -90,9 +92,20 @@
   <p>Total Quantity: <b> {{ totalQuantity }} </b> </p>
   <p>Total Price: <b>{{ totalPrice | currency }}</b> </p>
 
-  <p>If you have any questions about this invoice, please contact us at {{ companyPhone }} or {{ companyEmail }}.</p>
+  <p>If you have any questions about this invoice, please contact us at <b>{{ companyPhone }}</b> or <b>{{ companyEmail }}</b></p>
   <p>Thank you for your business!</p>
-</div>
+
+  <div style="display: flex; align-items: end; justify-content: end;">
+    <div *ngIf="!hideButtons" style="margin-bottom: 20px;">
+      <label>Upload Signature:</label>
+      <input type="file" (change)="onFileSelected($event)">
+    </div>
+    <!-- Display Signature -->
+    <div *ngIf="signatureUrl">
+      <img [src]="signatureUrl" alt="Signature" style="width: 150px; margin-top: 10px;">
+    </div>
+  </div>
+  </div>
 
 <div class="button-container" style="text-align: center; margin-top: 20px;">
   <button (click)="generatePdf()">Generate PDF</button>
