@@ -15,14 +15,14 @@ This project is an Invoice Generator built with Angular. It uses html2canvas to 
 - Angular CLI (v16 or later)
 
 Installation
-Clone the Repository:
-git clone https://github.com/yourusername/invoice-generator.git
-cd invoice-generator
+## Clone the Repository:
+- git clone https://github.com/abhinavnandekar27/pdf_generator.git
+- cd invoice-generator
 
-Install Dependencies:
-npm install
+## Install Dependencies:
+- npm install
 
-Run the Application:
-ng serve
+## Run the Application:
+- ng serve
 
 Navigate to http://localhost:4200 in your browser to see the application running.
