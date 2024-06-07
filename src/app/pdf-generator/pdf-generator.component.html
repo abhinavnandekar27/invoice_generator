@@ -1,0 +1,67 @@
+<div id="contentToConvert" style="width: 210mm; margin: 0 auto; padding: 20mm; background: #fff; font-family: Arial, sans-serif; border: 1px solid #ccc;">
+    <div style="text-align: center; margin-bottom: 20px;">
+      <h1>Company Name</h1>
+      <p>1234 Street Address, City, State, 12345</p>
+      <p>Phone: (123) 456-7890 | Email: infocompany.com</p>
+    </div>
+  
+    <div style="margin-bottom: 20px;">
+      <h2>Invoice</h2>
+      <p><strong>Date:</strong> June 7, 2024</p>
+      <p><strong>Invoice Number:</strong> 001</p>
+    </div>
+  
+    <div style="margin-bottom: 20px;">
+      <h3>Billing To:</h3>
+      <p><strong>Customer Name</strong></p>
+      <p>5678 Another St, Different City, State, 67890</p>
+      <p>Phone: (987) 654-3210 | Email: customerexample.com</p>
+    </div>
+  
+    <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+      <thead>
+        <tr>
+          <th style="border: 1px solid #ccc; padding: 8px;">Description</th>
+          <th style="border: 1px solid #ccc; padding: 8px; text-align: right;">Quantity</th>
+          <th style="border: 1px solid #ccc; padding: 8px; text-align: right;">Unit Price</th>
+          <th style="border: 1px solid #ccc; padding: 8px; text-align: right;">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="border: 1px solid #ccc; padding: 8px;">Product 1</td>
+          <td style="border: 1px solid #ccc; padding: 8px; text-align: right;">2</td>
+          <td style="border: 1px solid #ccc; padding: 8px; text-align: right;">$50.00</td>
+          <td style="border: 1px solid #ccc; padding: 8px; text-align: right;">$100.00</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid #ccc; padding: 8px;">Product 2</td>
+          <td style="border: 1px solid #ccc; padding: 8px; text-align: right;">1</td>
+          <td style="border: 1px solid #ccc; padding: 8px; text-align: right;">$150.00</td>
+          <td style="border: 1px solid #ccc; padding: 8px; text-align: right;">$150.00</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3" style="border: 1px solid #ccc; padding: 8px; text-align: right;"><strong>Subtotal</strong></td>
+          <td style="border: 1px solid #ccc; padding: 8px; text-align: right;">$250.00</td>
+        </tr>
+        <tr>
+          <td colspan="3" style="border: 1px solid #ccc; padding: 8px; text-align: right;"><strong>Tax (10%)</strong></td>
+          <td style="border: 1px solid #ccc; padding: 8px; text-align: right;">$25.00</td>
+        </tr>
+        <tr>
+          <td colspan="3" style="border: 1px solid #ccc; padding: 8px; text-align: right;"><strong>Total</strong></td>
+          <td style="border: 1px solid #ccc; padding: 8px; text-align: right;">$275.00</td>
+        </tr>
+      </tfoot>
+    </table>
+  
+    <p>If you have any questions about this invoice, please contact us at (123) 456-7890 or infocompany.com.</p>
+    <p>Thank you for your business!</p>
+  </div>
+  
+  <div class="button-container">
+    <button (click)="generatePdf()">Generate PDF</button>
+  </div>
+  

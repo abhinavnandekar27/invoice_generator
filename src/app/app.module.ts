@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { PdfGeneratorComponent } from './pdf-generator/pdf-generator.component';
+import { PdfGeneratorService } from './pdf-generator.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PdfGeneratorComponent
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule
+    BrowserModule
   ],
-  providers: [],
+  providers: [PdfGeneratorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
