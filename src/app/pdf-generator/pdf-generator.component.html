@@ -1,51 +1,73 @@
 <div class="form-container">
   <div class="form-group">
     <label>Company Name:</label>
-    <input type="text" [(ngModel)]="companyName">
+    <input type="text" [(ngModel)]="companyName" class="input-as-text">
   </div>
   <div class="form-group">
     <label>Company Address:</label>
-    <input type="text" [(ngModel)]="companyAddress">
+    <input type="text" [(ngModel)]="companyAddress" class="input-as-text">
   </div>
   <div class="form-group">
     <label>Company Phone:</label>
-    <input type="text" [(ngModel)]="companyPhone">
+    <input type="text" [(ngModel)]="companyPhone" class="input-as-text">
   </div>
   <div class="form-group">
     <label>Company Email:</label>
-    <input type="text" [(ngModel)]="companyEmail">
+    <input type="text" [(ngModel)]="companyEmail" class="input-as-text">
+  </div>
+  <div class="form-group">
+    <label>Invoice Number:</label>
+    <input type="text" [(ngModel)]="invoiceNumber" class="input-as-text">
+  </div>
+  <div class="form-group">
+    <label>Date:</label>
+    <input type="date" [(ngModel)]="currentDate" class="input-as-text">
   </div>
   <div class="form-group">
     <label>Customer Name:</label>
-    <input type="text" [(ngModel)]="customerName">
+    <input type="text" [(ngModel)]="customerName" class="input-as-text">
   </div>
   <div class="form-group">
     <label>Customer Address:</label>
-    <input type="text" [(ngModel)]="customerAddress">
+    <input type="text" [(ngModel)]="customerAddress" class="input-as-text">
   </div>
   <div class="form-group">
     <label>Customer Phone:</label>
-    <input type="text" [(ngModel)]="customerPhone">
+    <input type="text" [(ngModel)]="customerPhone" class="input-as-text">
   </div>
   <div class="form-group">
     <label>Customer Email:</label>
-    <input type="text" [(ngModel)]="customerEmail">
+    <input type="text" [(ngModel)]="customerEmail" class="input-as-text">
   </div>
 </div>
 
 <!-- Invoice Display -->
-<div id="contentToConvert"
+<div id="contentToConvert" 
+  [ngClass]="{ 'hidden-inputs': hideInputs }"
   style="width: 210mm; margin: 0 auto; padding: 20mm; background: #fff; font-family: Arial, sans-serif; border: 1px solid #ccc;">
-  <div style="text-align: center; margin-bottom: 20px;">
-    <h1>{{ companyName }}</h1>
-    <p>{{ companyAddress }}</p>
-    <p>Phone: {{ companyPhone }} | Email: {{ companyEmail }}</p>
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <div style="text-align: left;">
+      <h1>{{ companyName }}</h1>
+      <p>{{ companyAddress }}</p>
+      <p>Phone: {{ companyPhone }} | Email: {{ companyEmail }}</p>
+    </div>
+    <div style="text-align: right;">
+      <div *ngIf="!hideButtons" style="margin-bottom: 20px;">
+        <label>Upload Logo:</label>
+        <input type="file" (change)="onFileSelected($event)">
+      </div>
+      <!-- Display Logo -->
+      <div *ngIf="logoUrl">
+        <img [src]="logoUrl" alt="Logo" style="width: 150px; margin-top: 10px;">
+      </div>
+    </div>
   </div>
+  
 
   <div style="margin-bottom: 20px;">
     <h2>Invoice</h2>
-    <p><strong>Date:</strong> {{ currentDate }}</p>
-    <p><strong>Invoice Number:</strong> {{ invoiceNumber }}</p>
+    <div><b>Date: </b><span>{{ currentDate | date:'dd-MM-yyyy' }}</span></div>
+    <p><strong>Invoice Number: </strong><span>{{ invoiceNumber }}</span></p>
   </div>
 
   <div style="margin-bottom: 20px;">
@@ -59,53 +81,45 @@
     <button (click)="addItem()">Add Invoice Item</button>
   </div>
 
-  <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
-    <thead>
-      <tr>
-        <th style="border: 1px solid #ccc; padding: 8px;">Description</th>
-        <th style="border: 1px solid #ccc; padding: 8px; text-align: right;">Quantity</th>
-        <th style="border: 1px solid #ccc; padding: 8px; text-align: right;">Unit Price</th>
-        <th style="border: 1px solid #ccc; padding: 8px; text-align: right;">Total</th>
-        <th style="border: 1px solid #ccc; padding: 8px; text-align: center;" *ngIf="!hideButtons">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of invoiceItems; let i = index">
-        <td style="border: 1px solid #ccc; padding: 8px;">
-          <input type="text" [(ngModel)]="item.description">
-        </td>
-        <td style="border: 1px solid #ccc; padding: 8px; text-align: right;">
-          <input type="number" [(ngModel)]="item.quantity" (input)="calculateTotal(item)">
-        </td>
-        <td style="border: 1px solid #ccc; padding: 8px; text-align: right;">
-          <input type="number" [(ngModel)]="item.unitPrice" (input)="calculateTotal(item)">
-        </td>
-        <td style="border: 1px solid #ccc; padding: 8px; text-align: right;">
-          <input type="number" [(ngModel)]="item.total" [readonly]="true">
-        </td>
-        <td style="border: 1px solid #ccc; padding: 8px; text-align: center;" *ngIf="!hideButtons">
-          <button type="button" (click)="removeItem(i)">Remove</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <p>Total Quantity: <b> {{ totalQuantity }} </b> </p>
-  <p>Total Price: <b>{{ totalPrice | currency }}</b> </p>
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th style="text-align: right;">Quantity</th>
+          <th style="text-align: right;">Unit Price</th>
+          <th style="text-align: right;">Total</th>
+          <th style="text-align: center;" *ngIf="!hideButtons">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of invoiceItems; let i = index">
+          <td>
+            <input type="text" [(ngModel)]="item.description" class="input-as-text">
+          </td>
+          <td>
+            <input type="number" [(ngModel)]="item.quantity" (input)="calculateTotal(item)" class="input-as-text no-stepper" style="text-align: right;">
+          </td>
+          <td>
+            <input type="number" [(ngModel)]="item.unitPrice" (input)="calculateTotal(item)" class="input-as-text no-stepper" style="text-align: right;">
+          </td>
+          <td>
+            <input type="number" [(ngModel)]="item.total" [readonly]="true" class="input-as-text no-stepper" style="text-align: right;">
+          </td>
+          <td *ngIf="!hideButtons" style="text-align: center;">
+            <button type="button" (click)="removeItem(i)">Remove</button>
+          </td>
+        </tr>
+      </tbody>      
+    </table>
+  </div>
+
+  <p>Total Quantity: <b>{{ totalQuantity }}</b></p>
+  <p>Total Price: <b>{{ totalPrice | currency }}</b></p>
 
   <p>If you have any questions about this invoice, please contact us at <b>{{ companyPhone }}</b> or <b>{{ companyEmail }}</b></p>
   <p>Thank you for your business!</p>
-
-  <div style="display: flex; align-items: end; justify-content: end;">
-    <div *ngIf="!hideButtons" style="margin-bottom: 20px;">
-      <label>Upload Signature:</label>
-      <input type="file" (change)="onFileSelected($event)">
-    </div>
-    <!-- Display Signature -->
-    <div *ngIf="signatureUrl">
-      <img [src]="signatureUrl" alt="Signature" style="width: 150px; margin-top: 10px;">
-    </div>
-  </div>
-  </div>
+</div>
 
 <div class="button-container" style="text-align: center; margin-top: 20px;">
   <button (click)="generatePdf()">Generate PDF</button>

@@ -26,8 +26,8 @@ export class PdfGeneratorComponent {
   customerPhone: string = '(987) 654-3210';
   customerEmail: string = 'customer@example.com';
 
-  invoiceNumber: string = '001';
-  currentDate: string = new Date().toLocaleDateString();
+  invoiceNumber: string = '01';
+  currentDate: string = new Date().toISOString().substring(0, 10);
 
   subtotal: number = 0;
   tax: number = 0;
@@ -41,8 +41,9 @@ export class PdfGeneratorComponent {
   ];
 
   selectedItemIndex: number = -1;
-  signatureUrl: string | ArrayBuffer | null = null;
+  logoUrl: string | ArrayBuffer | null = null;
   hideButtons: boolean = false;
+  hideInputs: boolean = false; 
 
   constructor(private cdr: ChangeDetectorRef) {}
 
@@ -71,7 +72,7 @@ export class PdfGeneratorComponent {
     if (input.files && input.files[0]) {
       const file = input.files[0];
       const reader = new FileReader();
-      reader.onload = e => this.signatureUrl = reader.result;
+      reader.onload = e => this.logoUrl = reader.result;
       reader.readAsDataURL(file);
     }
   }

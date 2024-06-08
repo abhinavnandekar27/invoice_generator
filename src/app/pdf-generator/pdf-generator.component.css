@@ -1,91 +1,151 @@
+/* General styling for the container and table */
 #contentToConvert {
-    max-width: 210mm;
-    margin: 0 auto;
-    padding: 20mm;
-    background: #fff;
-    font-family: Arial, sans-serif;
-    border: 1px solid #ccc;
-  }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-  }
-  th, td {
-    border: 1px solid #ccc;
-    padding: 8px;
-    text-align: left;
-  }
-  th {
-    background-color: #f2f2f2;
-  }
-  tfoot td {
-    font-weight: bold;
-  }
-  .button-container {
-    text-align: center;
-    margin: 20px 0;
-  }
-  button {
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
-  button:hover {
-    background-color: #45a049;
+  max-width: 210mm;
+  margin: 0 auto;
+  padding: 20mm;
+  background: #fff;
+  font-family: Arial, sans-serif;
+  border: 1px solid #ccc;
+}
+
+.table-container {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.table-container table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.table-container th,
+.table-container td {
+  border: 1px solid #ccc;
+  padding: 8px;
+}
+
+.table-container th {
+  background-color: #f2f2f2;
+  text-align: left;
+}
+
+.table-container td input {
+  width: 100%;
+  box-sizing: border-box;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.table-container td input[readonly] {
+  color: inherit;
+  cursor: default;
+}
+
+/* Styling for hiding increment/decrement controls */
+.no-stepper {
+  -moz-appearance: textfield;
+}
+
+.no-stepper::-webkit-outer-spin-button,
+.no-stepper::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Styling for buttons and other elements */
+.button-container {
+  text-align: center;
+  margin: 20px 0;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+.form-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  font-size: 14px;
+  color: #333;
+}
+
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="date"]:focus,
+.form-group input[type="number"]:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+@media (max-width: 600px) {
+  .form-container {
+    padding: 15px;
   }
 
-  .form-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    background: #f9f9f9;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
   .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
   }
-  
-  .form-group label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
-    font-size: 14px;
-    color: #333;
+
+  .form-group input[type="text"],
+  .form-group input[type="date"],
+  .form-group input[type="number"] {
+    padding: 8px;
+    font-size: 13px;
   }
-  
-  .form-group input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    transition: border-color 0.3s;
-  }
-  
-  .form-group input[type="text"]:focus {
-    border-color: #007bff;
-    outline: none;
-  }
-  
-  @media (max-width: 600px) {
-    .form-container {
-      padding: 15px;
-    }
-  
-    .form-group {
-      margin-bottom: 15px;
-    }
-  
-    .form-group input[type="text"] {
-      padding: 8px;
-      font-size: 13px;
-    }
-  }
-  
+}
+
+.hidden-inputs input,
+.hidden-inputs button,
+.hidden-inputs select,
+.hidden-inputs textarea {
+  display: none;
+}
+
+.input-as-text {
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+.input-as-text:focus {
+  outline: none;
+}
