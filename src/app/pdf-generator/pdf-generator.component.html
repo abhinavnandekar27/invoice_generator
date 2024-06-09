@@ -65,7 +65,7 @@
   
 
   <div style="margin-bottom: 20px;">
-    <h2>Invoice</h2>
+    <h2 style="text-align: center;">Invoice</h2>
     <div><b>Date: </b><span>{{ currentDate | date:'dd-MM-yyyy' }}</span></div>
     <p><strong>Invoice Number: </strong><span>{{ invoiceNumber }}</span></p>
   </div>
@@ -116,9 +116,6 @@
 
   <p>Total Quantity: <b>{{ totalQuantity }}</b></p>
   <p>Total Price: <b>{{ totalPrice | currency }}</b></p>
-
-  <p>If you have any questions about this invoice, please contact us at <b>{{ companyPhone }}</b> or <b>{{ companyEmail }}</b></p>
-  <p>Thank you for your business!</p>
 </div>
 
 <div class="button-container" style="text-align: center; margin-top: 20px;">
