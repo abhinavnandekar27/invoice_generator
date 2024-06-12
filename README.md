@@ -3,7 +3,6 @@ This project is an Invoice Generator built with Angular. It uses html2canvas to 
 ## Features
 - Generate a PDF invoice from HTML content
 - Customizable invoice template
-- Responsive design for easy viewing on different devices
 
 ## Technologies Used
 1. **Angular 16**: Frontend framework
@@ -24,6 +23,9 @@ Installation
 
 ## Run the Application:
 - ng serve
+
+## Working Prototype
+-http://192.168.130.58:8080/pdf_generator/
 
 Navigate to http://localhost:4200 in your browser to see the application running.
 
