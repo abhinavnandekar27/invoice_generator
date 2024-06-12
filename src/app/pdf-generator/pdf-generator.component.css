@@ -1,10 +1,13 @@
+/* General styling for the container and table */
 #contentToConvert {
   max-width: 210mm;
   margin: 0 auto;
   padding: 20mm;
   background: #fff;
-  font-family: Arial, sans-serif;
+  font-family: 'Roboto', sans-serif;
   border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .table-container {
@@ -20,13 +23,15 @@
 
 .table-container th,
 .table-container td {
-  border: 1px solid #ccc;
-  padding: 8px;
+  border: 1px solid #e0e0e0;
+  padding: 12px;
+  text-align: left;
 }
 
 .table-container th {
-  background-color: #f2f2f2;
-  text-align: left;
+  background-color: #585858;
+  text-align: center;
+  font-weight: 600;
 }
 
 .table-container td input {
@@ -48,11 +53,13 @@
   -moz-appearance: textfield;
 }
 
-.no-stepper::-webkit-outer-spin-button,
-.no-stepper::-webkit-inner-spin-button {
+/* Hide increment and decrement arrows for number inputs */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
 
 /* Styling for buttons and other elements */
 .button-container {
@@ -62,24 +69,26 @@
 
 button {
   padding: 10px 20px;
-  background-color: #4CAF50;
+  background-color: #007bff;
   color: white;
   border: none;
+  border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 button:hover {
-  background-color: #45a049;
+  background-color: #0056b3;
 }
 
 .form-container {
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
-  background: #f9f9f9;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background: #fafafa;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
 }
 
 .form-group {
@@ -147,4 +156,140 @@ button:hover {
 
 .input-as-text:focus {
   outline: none;
+}
+
+/* Additional styling for header and footer */
+h1, h2, h3 {
+  color: #333;
+  margin: 0 0 10px 0;
+}
+
+h1 {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+p {
+  margin: 5px 0;
+  color: #666;
+}
+
+div {
+  margin-bottom: 20px;
+}
+
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin: 20px;
+}
+
+.form-container {
+  flex: 1;
+  background: #f0f8ff; /* Light blue background */
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.invoice-container {
+  flex: 2;
+  padding: 20px;
+  background: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(201, 58, 58, 0.1);
+}
+
+h1, h2, h3 {
+  color: #007bff; /* Blue color for headers */
+  margin: 10px 0;
+}
+
+.table-container {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+table, th, td {
+  border: 1px solid #007bff; /* Blue borders */
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+}
+
+th {
+  background: #007bff; /* Blue header background */
+  color: #ffffff; /* White text */
+}
+
+.totals-container, .payment-details, .terms-conditions {
+  margin-top: 20px;
+  border-top: 1px solid #007bff; /* Blue horizontal line */
+  padding-top: 10px;
+}
+
+.totals-container p, .payment-details p, .terms-conditions p {
+  margin: 5px 0;
+}
+
+button {
+  margin: 5px 0;
+  padding: 10px 20px;
+  background-color: #007bff; /* Blue button background */
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+.hidden-inputs input {
+  border: none;
+  background: transparent;
+  pointer-events: none;
 }

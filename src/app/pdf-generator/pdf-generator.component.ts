@@ -30,10 +30,17 @@ export class PdfGeneratorComponent {
   currentDate: string = new Date().toISOString().substring(0, 10);
 
   subtotal: number = 0;
+  taxRate: number = 0;
   tax: number = 0;
   total: number = 0;
   totalQuantity: number = 0;
   totalPrice: number = 0;
+
+  bankName: string = 'Bank Name';
+  accountNumber: string = '123456789';
+  iban: string = 'DE89370400440532013000';
+  swiftBic: string = 'COBADEFFXXX';
+  termsAndConditions: string = 'Payment is due within 30 days. Late payments may incur additional fees.';
 
   invoiceItems: InvoiceItem[] = [
     { description: 'Product 1', quantity: 0, unitPrice: 0, total: 0 },
@@ -63,8 +70,9 @@ export class PdfGeneratorComponent {
   }
 
   calculateSums(): void {
-    this.totalQuantity = this.invoiceItems.reduce((sum, item) => sum + item.quantity, 0);
-    this.totalPrice = this.invoiceItems.reduce((sum, item) => sum + item.total, 0);
+    this.subtotal = this.invoiceItems.reduce((sum, item) => sum + item.total, 0);
+    this.tax = (this.subtotal * this.taxRate) / 100;
+    this.total = this.subtotal + this.tax;
   }
 
   onFileSelected(event: Event): void {
@@ -76,7 +84,6 @@ export class PdfGeneratorComponent {
       reader.readAsDataURL(file);
     }
   }
-
 
   generatePdf(): void {
     this.hideButtons = true;

@@ -1,122 +1,149 @@
-<div class="form-container">
-  <div class="form-group">
-    <label>Company Name:</label>
-    <input type="text" [(ngModel)]="companyName" class="input-as-text">
+<div class="container">
+  <!-- Form Group -->
+  <div class="form-container">
+    <div class="form-group">
+      <label>Company Name:</label>
+      <input type="text" [(ngModel)]="companyName" class="input-as-text">
+    </div>
+    <div class="form-group">
+      <label>Company Address:</label>
+      <input type="text" [(ngModel)]="companyAddress" class="input-as-text">
+    </div>
+    <div class="form-group">
+      <label>Company Phone:</label>
+      <input type="text" [(ngModel)]="companyPhone" class="input-as-text">
+    </div>
+    <div class="form-group">
+      <label>Company Email:</label>
+      <input type="text" [(ngModel)]="companyEmail" class="input-as-text">
+    </div>
+    <div class="form-group">
+      <label>Invoice Number:</label>
+      <input type="text" [(ngModel)]="invoiceNumber" class="input-as-text">
+    </div>
+    <div class="form-group">
+      <label>Date:</label>
+      <input type="date" [(ngModel)]="currentDate" class="input-as-text">
+    </div>
+    <div class="form-group">
+      <label>Customer Name:</label>
+      <input type="text" [(ngModel)]="customerName" class="input-as-text">
+    </div>
+    <div class="form-group">
+      <label>Customer Address:</label>
+      <input type="text" [(ngModel)]="customerAddress" class="input-as-text">
+    </div>
+    <div class="form-group">
+      <label>Customer Phone:</label>
+      <input type="text" [(ngModel)]="customerPhone" class="input-as-text">
+    </div>
+    <div class="form-group">
+      <label>Customer Email:</label>
+      <input type="text" [(ngModel)]="customerEmail" class="input-as-text">
+    </div>
+    <div class="form-group">
+      <label>Tax Rate (%):</label>
+      <input type="number" [(ngModel)]="taxRate" (ngModelChange)="calculateSums()" class="input-as-text">
+    </div>
   </div>
-  <div class="form-group">
-    <label>Company Address:</label>
-    <input type="text" [(ngModel)]="companyAddress" class="input-as-text">
-  </div>
-  <div class="form-group">
-    <label>Company Phone:</label>
-    <input type="text" [(ngModel)]="companyPhone" class="input-as-text">
-  </div>
-  <div class="form-group">
-    <label>Company Email:</label>
-    <input type="text" [(ngModel)]="companyEmail" class="input-as-text">
-  </div>
-  <div class="form-group">
-    <label>Invoice Number:</label>
-    <input type="text" [(ngModel)]="invoiceNumber" class="input-as-text">
-  </div>
-  <div class="form-group">
-    <label>Date:</label>
-    <input type="date" [(ngModel)]="currentDate" class="input-as-text">
-  </div>
-  <div class="form-group">
-    <label>Customer Name:</label>
-    <input type="text" [(ngModel)]="customerName" class="input-as-text">
-  </div>
-  <div class="form-group">
-    <label>Customer Address:</label>
-    <input type="text" [(ngModel)]="customerAddress" class="input-as-text">
-  </div>
-  <div class="form-group">
-    <label>Customer Phone:</label>
-    <input type="text" [(ngModel)]="customerPhone" class="input-as-text">
-  </div>
-  <div class="form-group">
-    <label>Customer Email:</label>
-    <input type="text" [(ngModel)]="customerEmail" class="input-as-text">
+
+  <!-- Invoice Display -->
+  <div id="contentToConvert" 
+    [ngClass]="{ 'hidden-inputs': hideInputs }"
+    class="invoice-container">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+      <div style="text-align: left;">
+        <h1>{{ companyName }}</h1>
+        <p>{{ companyAddress }}</p>
+        <p>Phone: {{ companyPhone }} | Email: {{ companyEmail }}</p>
+      </div>
+      <div style="text-align: right;">
+        <div *ngIf="!hideButtons" style="margin-bottom: 20px;">
+          <label>Upload Logo:</label>
+          <input type="file" (change)="onFileSelected($event)">
+        </div>
+        <!-- Display Logo -->
+        <div *ngIf="logoUrl">
+          <img [src]="logoUrl" alt="Logo" style="width: 150px; margin-top: 10px;">
+        </div>
+      </div>
+    </div>
+    
+    <div style="margin-bottom: 20px;">
+      <h2 style="text-align: center;">INVOICE</h2>
+      <div><b>Date: </b><span>{{ currentDate | date:'dd-MM-yyyy' }}</span></div>
+      <p><strong>Invoice Number: </strong><span>{{ invoiceNumber }}</span></p>
+    </div>
+
+    <div style="margin-bottom: 20px;">
+      <h3>Billing To:</h3>
+      <p><strong>{{ customerName }}</strong></p>
+      <p>{{ customerAddress }}</p>
+      <p>Phone: {{ customerPhone }} | Email: {{ customerEmail }}</p>
+    </div>
+
+    <div style="margin-bottom: 20px;" *ngIf="!hideButtons">
+      <button (click)="addItem()">Add Invoice Item</button>
+    </div>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th style="text-align: center;">Quantity</th>
+            <th style="text-align: center;">Unit Price</th>
+            <th style="text-align: center;">Total</th>
+            <th style="text-align: center;" *ngIf="!hideButtons">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of invoiceItems; let i = index">
+            <td>
+              <input type="text" [(ngModel)]="item.description" (ngModelChange)="calculateTotal(item)" class="input-as-text" style="text-align: center;">
+            </td>
+            <td>
+              <input type="number" [(ngModel)]="item.quantity" (ngModelChange)="calculateTotal(item)" class="input-as-text" style="text-align: center;">
+            </td>
+            <td>
+              <input type="number" [(ngModel)]="item.unitPrice" (ngModelChange)="calculateTotal(item)" class="input-as-text" style="text-align: center;">
+            </td>
+            <td style="text-align: center;">{{ item.total | currency: 'INR' }}</td>
+            <td style="text-align: center;" *ngIf="!hideButtons">
+              <button (click)="removeItem(i)">Remove</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="totals-container">
+      <p><strong>Subtotal:</strong> {{ subtotal | currency: 'INR' }}</p>
+      <p><strong>Tax ({{ taxRate }}%):</strong> {{ tax | currency: 'INR' }}</p>
+      <h3><strong>Total:</strong> {{ total | currency: 'INR' }}</h3>
+    </div>
+
+    <div class="payment-details">
+      <h3>Payment Details:</h3>
+      <p><strong>Bank Name:</strong> {{ bankName }}</p>
+      <p><strong>Account Number:</strong> {{ accountNumber }}</p>
+      <p><strong>IBAN:</strong> {{ iban }}</p>
+      <p><strong>SWIFT/BIC:</strong> {{ swiftBic }}</p>
+    </div>
+
+    <div class="terms-conditions">
+      <h3>Terms & Conditions:</h3>
+      <p>{{ termsAndConditions }}</p>
+    </div>
+    <br>
+    <div class="thank-you" style="text-align: center;">
+      <p><i>Thank you for your business!</i></p>
+    </div>
+    
   </div>
 </div>
 
-<div id="contentToConvert" 
-  [ngClass]="{ 'hidden-inputs': hideInputs }"
-  style="width: 210mm; margin: 0 auto; padding: 20mm; background: #fff; font-family: Arial, sans-serif; border: 1px solid #ccc;">
-  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-    <div style="text-align: left;">
-      <h1>{{ companyName }}</h1>
-      <p>{{ companyAddress }}</p>
-      <p>Phone: {{ companyPhone }} | Email: {{ companyEmail }}</p>
-    </div>
-    <div style="text-align: right;">
-      <div *ngIf="!hideButtons" style="margin-bottom: 20px;">
-        <label>Upload Logo:</label>
-        <input type="file" (change)="onFileSelected($event)">
-      </div>
-      <!-- Display Logo -->
-      <div *ngIf="logoUrl">
-        <img [src]="logoUrl" alt="Logo" style="width: 150px; margin-top: 10px;">
-      </div>
-    </div>
-  </div>
-  
-
-  <div style="margin-bottom: 20px;">
-    <h2 style="text-align: center;">INVOICE</h2>
-    <div><b>Date: </b><span>{{ currentDate | date:'dd-MM-yyyy' }}</span></div>
-    <p><strong>Invoice Number: </strong><span>{{ invoiceNumber }}</span></p>
-  </div>
-
-  <div style="margin-bottom: 20px;">
-    <h3>Billing To:</h3>
-    <p><strong>{{ customerName }}</strong></p>
-    <p>{{ customerAddress }}</p>
-    <p>Phone: {{ customerPhone }} | Email: {{ customerEmail }}</p>
-  </div>
-
-  <div style="margin-bottom: 20px;" *ngIf="!hideButtons">
-    <button (click)="addItem()">Add Invoice Item</button>
-  </div>
-
-  <div class="table-container">
-    <table>
-      <thead>
-        <tr>
-          <th>Description</th>
-          <th style="text-align: right;">Quantity</th>
-          <th style="text-align: right;">Unit Price</th>
-          <th style="text-align: right;">Total</th>
-          <th style="text-align: center;" *ngIf="!hideButtons">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of invoiceItems; let i = index">
-          <td>
-            <input type="text" [(ngModel)]="item.description" class="input-as-text">
-          </td>
-          <td>
-            <input type="number" [(ngModel)]="item.quantity" (input)="calculateTotal(item)" class="input-as-text no-stepper" style="text-align: right;">
-          </td>
-          <td>
-            <input type="number" [(ngModel)]="item.unitPrice" (input)="calculateTotal(item)" class="input-as-text no-stepper" style="text-align: right;">
-          </td>
-          <td>
-            <input type="number" [(ngModel)]="item.total" [readonly]="true" class="input-as-text no-stepper" style="text-align: right;">
-          </td>
-          <td *ngIf="!hideButtons" style="text-align: center;">
-            <button type="button" (click)="removeItem(i)">Remove</button>
-          </td>
-        </tr>
-      </tbody>      
-    </table>
-  </div>
-
-  <p>Total Quantity: <b>{{ totalQuantity }}</b></p>
-  <p>Total Price: <b>{{ totalPrice | currency }}</b></p>
-</div>
-
-<div class="button-container" style="text-align: center; margin-top: 20px;">
+<!-- Generate PDF Button -->
+<div *ngIf="!hideButtons" style="text-align: center; margin-top: 20px;">
   <button (click)="generatePdf()">Generate PDF</button>
 </div>
