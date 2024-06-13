@@ -45,6 +45,22 @@
       <label>Tax Rate (%):</label>
       <input type="number" [(ngModel)]="taxRate" (ngModelChange)="calculateSums()" class="input-as-text">
     </div>
+    <div class="form-group">
+      <label for="bankName">Bank Name:</label>
+      <input type="text" id="bankName" [(ngModel)]="bankName">
+    </div>
+    <div class="form-group">
+      <label for="accountNumber">Account Number:</label>
+      <input type="text" id="accountNumber" [(ngModel)]="accountNumber">
+    </div>
+    <div class="form-group">
+      <label for="iban">IBAN:</label>
+      <input type="text" id="iban" [(ngModel)]="iban">
+    </div>
+    <div class="form-group">
+      <label for="swiftBic">SWIFT/BIC:</label>
+      <input type="text" id="swiftBic" [(ngModel)]="swiftBic">
+    </div>
   </div>
 
   <!-- Invoice Display -->
@@ -125,15 +141,15 @@
 
     <div class="payment-details">
       <h3>Payment Details:</h3>
-      <p><strong>Bank Name:</strong> {{ bankName }}</p>
-      <p><strong>Account Number:</strong> {{ accountNumber }}</p>
-      <p><strong>IBAN:</strong> {{ iban }}</p>
-      <p><strong>SWIFT/BIC:</strong> {{ swiftBic }}</p>
+      <p><strong>Bank Name:</strong> <input type="text" [(ngModel)]="bankName" class="input-as-text"></p>
+      <p><strong>Account Number:</strong> <input type="text" [(ngModel)]="accountNumber" class="input-as-text"></p>
+      <p><strong>IBAN:</strong> <input type="text" [(ngModel)]="iban" class="input-as-text"></p>
+      <p><strong>SWIFT/BIC:</strong> <input type="text" [(ngModel)]="swiftBic" class="input-as-text"></p>
     </div>
 
     <div class="terms-conditions">
       <h3>Terms & Conditions:</h3>
-      <p>{{ termsAndConditions }}</p>
+      <p>Payment is due within 30 days. Late payments may incur additional fees.</p>
     </div>
     <br>
     <div class="thank-you" style="text-align: center;">

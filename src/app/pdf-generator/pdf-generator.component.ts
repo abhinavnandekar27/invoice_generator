@@ -40,7 +40,6 @@ export class PdfGeneratorComponent {
   accountNumber: string = '123456789';
   iban: string = 'DE89370400440532013000';
   swiftBic: string = 'COBADEFFXXX';
-  termsAndConditions: string = 'Payment is due within 30 days. Late payments may incur additional fees.';
 
   invoiceItems: InvoiceItem[] = [
     { description: 'Product 1', quantity: 0, unitPrice: 0, total: 0 },
