@@ -25,7 +25,7 @@ Installation
 - ng serve
 
 ## Working Prototype
--http://192.168.130.58:8080/pdf_generator/
+- http://192.168.43.114:8080
 
 Navigate to http://localhost:4200 in your browser to see the application running.
 
