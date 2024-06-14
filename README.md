@@ -29,6 +29,6 @@ Installation
 
 Navigate to http://localhost:4200 in your browser to see the application running.
 
-![Screenshot (27)](https://github.com/abhinavnandekar27/pdf_generator/assets/167284154/11538d04-cbde-45f0-ac01-d285c02bffc5)
-![Screenshot (28)](https://github.com/abhinavnandekar27/pdf_generator/assets/167284154/d0a1c9d3-033c-4aa4-9377-13394c171416)
-![Screenshot (29)](https://github.com/abhinavnandekar27/pdf_generator/assets/167284154/2aba1afc-6c10-404a-89c3-3690833452ed)
+![Screenshot (30)](https://github.com/abhinavnandekar27/invoice_generator/assets/167284154/a362fcfe-f259-4b74-942f-3dd6fd5a0f5f)
+![Screenshot (31)](https://github.com/abhinavnandekar27/invoice_generator/assets/167284154/a8a0e0a2-93cc-4f67-b275-b1870b99cb36)
+![Screenshot (32)](https://github.com/abhinavnandekar27/invoice_generator/assets/167284154/5f56ca18-3d0e-4b32-a127-b10da8c2f3f4)
