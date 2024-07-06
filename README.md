@@ -24,9 +24,6 @@ Installation
 ## Run the Application:
 - ng serve
 
-## Working Prototype
-- http://192.168.43.114:8080
-
 Navigate to http://localhost:4200 in your browser to see the application running.
 
 ![Screenshot (30)](https://github.com/abhinavnandekar27/invoice_generator/assets/167284154/a362fcfe-f259-4b74-942f-3dd6fd5a0f5f)
