@@ -10,7 +10,7 @@ This project is an Invoice Generator built with Angular. It uses html2canvas to 
 3. **jspdf**: Library to generate PDFs
 
 ### Prerequisites
-- Node.js (v14 or later)
+- Node.js (v18 or later)
 - Angular CLI (v16 or later)
 
 Installation
@@ -18,12 +18,19 @@ Installation
 - git clone https://github.com/abhinavnandekar27/pdf_generator.git
 - cd invoice-generator
 
+## Run Dockerfile OR docker-compose.yml
+- docker build -t my-invoice .
+- docker run my-image
+OR
+- docker-compose build
+- docker-compose up/down
+Navigate to http://localhost in your browser to see the application running.
+
 ## Install Dependencies:
 - npm install
 
 ## Run the Application:
 - ng serve
-
 Navigate to http://localhost:4200 in your browser to see the application running.
 
 ![Screenshot (30)](https://github.com/abhinavnandekar27/invoice_generator/assets/167284154/a362fcfe-f259-4b74-942f-3dd6fd5a0f5f)
