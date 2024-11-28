@@ -1,0 +1,6 @@
+services:
+  angular-app:
+    build: .
+    ports:
+      - "80:80"
+    container_name: angular-invoice-generator
