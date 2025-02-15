@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: invoice-app
+  name: invoice-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: invoice-generator
+          image: abhinavnandekar/invoice-generator:latest 
+          ports:
+          - containerPort: 8000
